@@ -1,0 +1,259 @@
+"--------------------------------------------------------------------------
+"	全局设置（:help）
+"--------------------------------------------------------------------------
+set nocompatible		" 不要vim模仿vi模式，建议设置，否则会有很多不兼容的问题
+set backspace=indent,eol,start	" 设置backspace的工作方式（indent: 允许删除自动缩进；eol允许删除行；start允许删除插入前的输入）
+set number			" 显示行号
+set nowrap			" 不自动换行
+set textwidth=0         	" 不自动拆行
+"set tabstop=4			" TAB键所表示的空格数
+"set shiftwidth=4		" 缩进所表示的空格数（不同于TAB，是利用>>缩进的大小，自动缩进也看这个值）
+":set expandtab			" 使用空格替代tab
+":%retab!			" 将tab替换为空格，不加“！”表示只替换行首的tab
+set autoindent			" 智能自动缩进
+filetype on			" 开启文件类型识别功能
+filetype plugin on		" 根据文件类型允许插件文件的载入
+filetype indent on		" 根据文件类型自动缩进
+"set cindent			" 按照C代码风格进行自动缩进
+set incsearch			" 在输入要搜索的文字时，实时匹配
+set hlsearch			" 对被搜索的表达式显示高亮
+syntax enable			" 设置语法高亮可用
+syntax on			" 开启语法高亮
+colorscheme desert		" 自定义颜色方案（:help hi）
+set fdm=syntax			" 设置按照语法进行折叠
+set cursorline			" 设置光标所在行的行标记
+"set cursorcolumn		" 设置光标所在列的列标记
+"set cinoptions=>s,e0,n0,f0,{0,}0,^0,:s,=s,l0,gs,hs,ps,ts,+s,c3,C0,(2s,us,\U0,w0,m0,j0,)20,*30	" 默认cinoption设置
+set cinoptions=g0,:0,t0		" 设置C++的public、protected和private关键字不缩进、以及case不缩进
+set ignorecase			" 查找时忽略大小写，简写为set ic
+"set noignorecase		" 查找时匹配大小写，简写为set noic
+set cc=100			" 列标
+
+"--------------------------------------------------------------------------
+"	字符编码
+"--------------------------------------------------------------------------
+set fileencodings=utf-8,gb2312,gbk,gb18030,big5,ucs-bom,utf-16,cp936,latin1,default	" 可支持的文件编码
+set fileencoding=utf-8	" 文件编码
+set termencoding=utf-8	" 终端编码
+set encoding=utf-8	" 内部编码
+set fileformats=unix,dos,mac	" 支持的文件格式
+set fileformat=unix	" 文件格式
+
+"--------------------------------------------------------------------------
+"	设置热键
+"--------------------------------------------------------------------------
+"	设置F3在去除高亮热键
+"map	<silent> <f3>	:noh<cr>
+"imap	<silent> <f3>	<esc><f3>a
+"	设置F4启动bash子进程热键
+map	<f4>	:!bash<cr>
+imap	<f4>	<esc><f4>
+"	设置F5进入二进制xxd编辑模式
+"map	<f5>	:%!xxd<cr>
+"imap	<f5>	<esc><f5>a
+"	设置F6退出二进制xxd编辑模式
+"map	<f6>	:%!xxd -r<cr>
+"imap	<f6>	<esc><f6>a
+"	设置调整窗口size的热键
+nmap	<A-LEFT>	<C-W><
+nmap	<A-RIGHT>	<C-W>>
+nmap	<A-UP>		<C-W>+
+nmap	<A-DOWN>	<C-W>-
+"	设置一行太长，并且wrap被设置时，按视觉效果上下行移动，而不是按实际行进行移动
+"nmap	J	gj
+"nmap	K	gk
+"	设置将当前word设置高亮
+"	vim中的左右字符边界为：\<和\>，而不是标准正则中的\b
+nmap	<silent> mm	yiw:syntax match Todo	/\<<C-r>0\>/<cr>
+nmap	<silent> mc	yiw:syntax clear Todo	<cr>
+nmap	<silent> mk1	yiw:1match DiffChange	/\<<C-r>0\>/<cr>
+nmap	<silent> mn1	yiw:1match none<cr>
+nmap	<silent> mk2	yiw:2match IncSearch	/\<<C-r>0\>/<cr>
+nmap	<silent> mn2	yiw:2match none<cr>
+nmap	<silent> mk3	yiw:3match ErrorMsg	/\<<C-r>0\>/<cr>
+nmap	<silent> mn3	yiw:3match none<cr>
+
+"	vi中的查找有两种方式：
+"	一：/和?需要用户自己输入，并且按照正则进行匹配，一个向下查找，一个向上查找
+"	二：*和#默认匹配当前单词，进行严格匹配，一个向上查找，一个向下查找。非严格匹配使用g*和g#，非严格匹配允许部分匹配
+"	快速选中当前词，使用iw和相关命令进行组合，例如：viw, yiw，iw表示inner word，详见：:help iw
+"	与iw相关的还有i[、i(等等，表示匹配在括号之内的所有数据。在括号范围内还可以使用a(，它和i(的不同是：i(部包含括号，而a(包含括号
+
+nmap	<silent> <C-m>	<esc>:cw<cr>
+
+"set paste	" 进入粘贴模式
+"set nopaste	" 退出粘贴模式
+"set pastetoggle=<C-p>	" 切换“输入/粘贴”模式
+
+"--------------------------------------------------------------------------
+"	Vundle Plugin Manager
+"	1、git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+"	2、copy config from ~/.vim/bundle/Vundle.vim/README.md
+"	3、open a empty file with vim
+"	3、run :BundleClean
+"	3、run :BundleUpdate
+"	3、run :PluginInstall
+"	3、run :BundleInstall
+"	3、run :GoInstallBinaries
+"--------------------------------------------------------------------------
+set nocompatible              " be iMproved, required
+filetype off                  " required
+
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+" alternatively, pass a path where Vundle should install plugins
+"call vundle#begin('~/some/path/here')
+
+" let Vundle manage Vundle, required
+Plugin 'VundleVim/Vundle.vim'
+
+" Plugin Package
+Plugin 'Tagbar'
+Plugin 'scrooloose/nerdtree'
+Plugin 'fatih/vim-go'
+Bundle 'davidhalter/jedi-vim'
+
+" All of your Plugins must be added before the following line
+call vundle#end()            " required
+filetype plugin indent on    " required
+" To ignore plugin indent changes, instead use:
+"filetype plugin on
+"
+" Brief help
+" :PluginList       - lists configured plugins
+" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
+" :PluginSearch foo - searches for foo; append `!` to refresh local cache
+" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
+"
+" see :h vundle for more details or wiki for FAQ
+" Put your non-Plugin stuff after this line
+"
+"--------------------------------------------------------------------------
+"	NERDTree
+"--------------------------------------------------------------------------
+"""将F2设置为开关NERDTree的快捷键
+map <F2> :NERDTreeToggle<cr>
+" 修改树的显示图标
+let g:NERDTreeDirArrowExpandable = '+'
+let g:NERDTreeDirArrowCollapsible = '-'
+" 窗口位置
+let g:NERDTreeWinPos='left'
+" 窗口尺寸
+let g:NERDTreeSize=30
+" 窗口宽度
+let NERDTreeWinSize=30
+" 不显示隐藏文件
+let g:NERDTreeHidden=0
+" 打开vim时如果没有文件自动打开NERDTree
+"autocmd vimenter * if !argc()|NERDTree|endif
+" 当NERDTree为剩下的唯一窗口时自动关闭
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+" 打开vim时自动打开NERDTree
+"autocmd vimenter * NERDTree</cr></F2>
+" 忽略以下文件的显示
+let NERDTreeIgnore=['\.pyc','\~$','\.swp']
+
+"--------------------------------------------------------------------------
+"	Tagbar
+"--------------------------------------------------------------------------
+"文件侦查启动,用以检测文件的后缀
+filetyp on
+"打开文件自动 打开tagbar
+"autocmd BufReadPost *.cpp,*.c,*.h,*.hpp,*.cc,*.cxx,*.go call tagbar#autoopen()
+"映射tagbar的快捷键
+map <F3> :TagbarToggle<CR>
+"设置tagbar的窗口宽度
+let g:tagbar_width=30
+"设置tagbar的窗口显示的位置,为左边
+let g:tagbar_left=1
+"关闭排序,即按标签本身在文件中的位置排序
+let g:tagbar_sort = 0
+"开启自动预览(随着光标在标签上的移动，顶部会出现一个实时的预览窗口)
+let g:tagbar_autopreview = 0
+
+"--------------------------------------------------------------------------
+"	格式化显示（需要set list才能正常显示）
+"--------------------------------------------------------------------------
+"" 显式输出tab和空格
+""set list
+"" 设置tab和空格样式
+"set lcs=tab:\|\ ,trail:-
+"" 对普通空白符不着色
+"highlight Whitespace ctermfg=none guifg=none
+"match Whitespace /\s\+/
+"" 对行首tab着灰色
+"highlight LeaderTab ctermfg=grey guifg=grey
+"2match LeaderTab /^\t\+/
+"" 对行尾空白符着红色
+"highlight WhitespaceEOL ctermfg=red guifg=red
+"3match WhitespaceEOL /\s\+$/
+
+"--------------------------------------------------------------------------
+"	设置自定义颜色（不使用自动命令无法生效）
+"--------------------------------------------------------------------------
+autocmd BufRead,BufNewFile *.[ch]* syntax keyword Typedef byte
+autocmd BufRead,BufNewFile *.[ch]* syntax keyword Typedef uchar
+autocmd BufRead,BufNewFile *.[ch]* syntax keyword Typedef ushort
+autocmd BufRead,BufNewFile *.[ch]* syntax keyword Typedef uint
+autocmd BufRead,BufNewFile *.[ch]* syntax keyword Typedef ulong
+autocmd BufRead,BufNewFile *.[ch]* syntax keyword Typedef string
+
+"--------------------------------------------------------------------------
+"	设置c-support
+"--------------------------------------------------------------------------
+"	设置c-support的命令符
+let g:C_MapLeader='@'
+"	设置c-support根据文件扩展名使用不同的模板
+let g:C_Styles = { '*.c,*.h' : 'default', '*.cc,*.cpp,*.hpp' : 'CPP' }
+
+"--------------------------------------------------------------------------
+"	设置MiniBufExplorer（利用ctrl进行窗口切换）
+"--------------------------------------------------------------------------
+let g:miniBufExplMapCTabSwitchBufs = 1 " 供过tab切换窗口
+let g:miniBufExplMapWindowNavVim = 1 " 通过h,j,k,l切换窗口
+let g:miniBufExplMapWindowNavArrows = 1 " 通过方向键切换窗口
+
+"--------------------------------------------------------------------------
+"	设置OmniCppComplete
+"--------------------------------------------------------------------------
+set tags+=~/.vim/tags/ctags
+set tags+=~/.vim/tags/cpptags
+set tags+=~/.vim/tags/cppexttags
+set tags+=~/.vim/tags/gnutags
+"set tags+=~/.vim/tags/phptags
+"set tags+=~/.vim/tags/kerneltags
+"	设置PythonComplete（没有看到效果）
+"autocmd FileType python set omnifunc=pythoncomplete#Complete
+
+let OmniCpp_NamespaceSearch = 1
+let OmniCpp_GlobalScopeSearch = 1
+let OmniCpp_ShowAccess = 1
+let OmniCpp_ShowPrototypeInAbbr = 1 " 显示函数参数列表
+let OmniCpp_MayCompleteDot = 1   " 输入 .  后自动补全
+let OmniCpp_MayCompleteArrow = 1 " 输入 -> 后自动补全
+let OmniCpp_MayCompleteScope = 1 " 输入 :: 后自动补全
+"let OmniCpp_DefaultNamespaces = ["std", \"_GLIBCXX_STD"]
+" 自动关闭补全窗口
+"au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
+set completeopt=menuone,menu,longest
+
+"--------------------------------------------------------------------------
+"	设置鼠标及滚轮
+"--------------------------------------------------------------------------
+:set	mouse=
+":set	mouse=a
+":map	<ScrollWheelUp>		<C-Y>
+":map	<S-ScrollWheelUp>	<C-B>
+":map	<C-ScrollWheelUp>	<C-U>
+":map	<ScrollWheelDown>	<C-E>
+":map	<S-ScrollWheelDown>	<C-F>
+":map	<C-ScrollWheelDown>	<C-D>
+
+"--------------------------------------------------------------------------
+"	添加临时配置
+"--------------------------------------------------------------------------
+if findfile('./vimrc') != ''
+	source ./vimrc
+endif
+

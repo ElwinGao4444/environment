@@ -1,0 +1,39 @@
+#!/bin/bash
+
+echo "rm $*"
+
+files=$*
+count=0
+
+nowtime=`date "+%Y-%m-%d.%H:%M:%S"`
+echo $nowtime
+
+# identify a usable path
+target_dir=~/trash/$nowtime"#"$count/
+while [ -d $target_dir ];do
+	((count++))
+	target_dir=~/trash/$files"#"$nowtime"#"$count/
+done
+
+# write basic meta
+mkdir -p $target_dir
+echo "remove file to trash:" $target_dir
+echo "cmd:" "rm $*" | tee -a $target_dir/.rm_meta
+echo "pwd:" `pwd` | tee -a $target_dir/.rm_meta
+
+# mv each file to trash dir
+for file in $files;do
+	if [ -f $file -o -d $file ];then
+		echo "del from:" `pwd -P $file`"/"$file | tee -a $target_dir/.rm_meta
+		mv $file $target_dir
+	else
+		echo "rm-trash: \""$file"\" No such file or directory" 
+	fi
+done
+
+# link last del
+if [ -h ~/trash/last_del ]; then
+	unlink ~/trash/last_del
+fi
+ln -s $target_dir ~/trash/last_del
+

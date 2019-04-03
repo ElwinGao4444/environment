@@ -1,0 +1,70 @@
+#!/usr/bin/expect -f
+
+#trap sigwinch spawned
+trap {
+	set rows [stty rows]
+		set cols [stty columns]
+		stty rows $rows columns $cols < $spawn_out(slave,name)
+} WINCH
+
+set user yourusername
+set passwd yourpasswd
+
+if {$argc == 0} {
+	set machine yourdevhostip
+}
+if {$argc >= 1} {
+	set domain [lindex $argv 0]
+	switch -- $domain {
+		"tw" {
+			set domain yourdomain
+			set gangway yourgangway
+			set sudo yoursudocommand
+		}
+		"tn" {
+			set domain yourdomain
+			set gangway yourgangway
+			set sudo yoursudocommand
+		}
+	}
+}
+if {$argc == 2} {
+	set machine [lindex $argv 1]
+}
+
+if {![info exists domain]} {
+	set machine $user@$machine
+	spawn ssh $machine
+	expect {
+		"password:"	{ send "$passwd\n"; interact; exit 0 }
+		"yourtag"	{ interact; exit 0 }
+	}
+} else {
+	set domain $user@$domain
+	spawn ssh $domain
+	expect {
+		"DomainPassword" { send "$passwd"; interact; exit 0 }
+		"$user" {
+			send "ssh $gangway\n"
+			expect "$user"
+			send "$sudo\n"
+			expect {
+				"password" {
+					send "$passwd\n"
+					expect "root"
+					if {[info exists machine]} {
+						send "ssh $machine\n"
+						interact; exit 0
+					}
+					interact; exit 0
+				}
+			}
+		}
+	}
+	interact
+	exit 0
+}
+
+puts "finish"
+exit 0
+
