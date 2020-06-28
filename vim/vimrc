@@ -25,7 +25,7 @@ set cursorline			" 设置光标所在行的行标记
 "set cursorcolumn		" 设置光标所在列的列标记
 "set cinoptions=>s,e0,n0,f0,{0,}0,^0,:s,=s,l0,gs,hs,ps,ts,+s,c3,C0,(2s,us,\U0,w0,m0,j0,)20,*30	" 默认cinoption设置
 set cinoptions=g0,:0,t0		" 设置C++的public、protected和private关键字不缩进、以及case不缩进
-set ignorecase			" 查找时忽略大小写，简写为set ic
+"set ignorecase			" 查找时忽略大小写，简写为set ic
 "set noignorecase		" 查找时匹配大小写，简写为set noic
 set cc=100			" 列标
 
@@ -90,11 +90,11 @@ nmap	<silent> <C-m>	<esc>:cw<cr>
 "	1、git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 "	2、copy config from ~/.vim/bundle/Vundle.vim/README.md
 "	3、open a empty file with vim
-"	3、run :BundleClean
-"	3、run :BundleUpdate
-"	3、run :PluginInstall
-"	3、run :BundleInstall
-"	3、run :GoInstallBinaries
+"	4、run :BundleClean
+"	5、run :BundleInstall
+"	6、run :BundleUpdate
+"	7、run :PluginInstall
+"	8、run :GoInstallBinaries
 "--------------------------------------------------------------------------
 set nocompatible              " be iMproved, required
 filetype off                  " required
@@ -111,7 +111,8 @@ Plugin 'VundleVim/Vundle.vim'
 " Plugin Package
 Plugin 'Tagbar'
 Plugin 'scrooloose/nerdtree'
-Plugin 'fatih/vim-go'
+Plugin 'fatih/vim-go'	"GoDef失败时，手动设置：let g:go_def_mode = 'godef'
+Plugin 'nsf/gocode', {'rtp': 'vim/'}
 Bundle 'davidhalter/jedi-vim'
 
 " All of your Plugins must be added before the following line
@@ -237,6 +238,25 @@ let OmniCpp_MayCompleteScope = 1 " 输入 :: 后自动补全
 " 自动关闭补全窗口
 "au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
 set completeopt=menuone,menu,longest
+
+"--------------------------------------------------------------------------
+"	设置quickfix窗口
+"
+"	vimgrep配合quickfix用法:
+"	1. vimgrep /<keyword>/gj **/*.c
+"		" g参数表示一行多个匹配分别展示
+"		" j参数禁止了grep后自动跳转到第一条匹配
+"		" **表示对所有子目录进行递归搜索
+"		" *.c表示只对.c文件进行搜索
+"		" 搜索目标可以有多个，通过“空格”进行分割
+"	2. 执行完vimgrep后，quickfix窗口不会自动打开，需要手动打开
+"		" copen & cclose 打开&关闭quickfix
+"		" cw 如果quickfix有内容就打开，没内容就什么都不做
+"		" cn(cnext) & cp(cprevious) 根据当前位置，查询下一条（或上一条）匹配
+"		" cc <num> 根据quickfix中list的编号，直接进行跳转
+"--------------------------------------------------------------------------
+" 回车自动跳转，效果等同于“:cc <num>”（cc命令更灵活，可以在任意窗口执行跳转）
+autocmd BufReadPost quickfix nnoremap <buffer> <CR> <CR> 
 
 "--------------------------------------------------------------------------
 "	设置鼠标及滚轮

@@ -1,0 +1,16 @@
+# .bash_profile
+
+# Get the aliases and functions
+PATH=$HOME/bin:$PATH
+export PATH
+
+umask 027
+export HISTCONTROL=erasedups
+
+export BASH_SILENCE_DEPRECATION_WARNING=1
+
+# User specific environment and startup programs
+if [ -f ~/.bashrc ]; then
+	. ~/.bashrc
+fi
+

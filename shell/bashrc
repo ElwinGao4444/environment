@@ -1,0 +1,40 @@
+# .bashrc
+
+# Source global definitions
+if [ -f /etc/bashrc ]; then
+	. /etc/bashrc
+fi
+
+# Start bash_completion
+if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
+    . /etc/bash_completion
+fi
+
+# basic env
+uname=$(uname)
+if [ $uname == "Darwin" ];then
+	export OS="Mac"
+elif [ $uname == "Linux" ];then
+	export OS="Linux"
+else
+	export OS="Unknown"
+fi
+
+export LANG='en_US.UTF-8'
+
+# gcc env
+# export GCC_ROOT=/usr/local/gcc
+# export PATH=$GCC_ROOT/bin:$PATH
+# export C_INCLUDE_PATH=$GCC_ROOT/include
+# export CPLUS_INCLUDE_PATH=$GCC_ROOT/include/c++
+# export LD_LIBRARY_PATH=$GCC_ROOT/lib
+# export LIBRARY_PATH=
+
+# export http_proxy=http://127.0.0.1:1087
+# export https_proxy=http://127.0.0.1:1087
+
+# Source diy definitions
+if [ -f ~/.bashrc.inc ]; then
+	. ~/.bashrc.inc
+fi
+
