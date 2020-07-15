@@ -30,6 +30,21 @@ export LANG='en_US.UTF-8'
 # export LD_LIBRARY_PATH=$GCC_ROOT/lib
 # export LIBRARY_PATH=
 
+# java env
+export JAVA_HOME=`/usr/libexec/java_home -v 1.8`
+export PATH=$JAVA_HOME/bin:$PATH
+
+# golang env
+export GOPATH=~/Library/Gopath
+export WORKSPACE=~/workspace
+export PATH=~/Library/Gopath/bin:$PATH
+
+# fenbi dev-env
+export PATH=$PATH:/Users/elwin/workspace/fenbi-code-tool/bin
+export M3_HOME=/usr/local/Cellar/maven/3.6.3_1
+export PATH=$M3_HOME/bin:$PATH
+export MAVEN_OPTS="-Xms256m -Xmx1024m -Dfile.encoding=UTF-8"
+
 # export http_proxy=http://127.0.0.1:1087
 # export https_proxy=http://127.0.0.1:1087
 
