@@ -3,7 +3,7 @@
 #--------------------------------------------------------------
 alias vi='vim'
 alias view='vim -R'
-if [ "x$SYSTEM" == "xMac" ];then
+if [ "x$OS" == "xMac" ];then
 	alias ls='ls -G'
 	alias readlink='greadlink'
 else
@@ -27,7 +27,7 @@ alias fgrep='fgrep --color'
 alias diff='diff -b -B'
 alias diffdir='diff -ruNa --brief'
 alias watch='watch -d -n 1'
-if [ "x$SYSTEM" == "xLinux" ];then
+if [ "x$OS" == "xLinux" ];then
 	alias top='top -s'
 fi
 # alias rsync='rsync -avzP'
@@ -101,7 +101,7 @@ alias cc='gcc -Wall -Wextra -g3'
 # alias ccp='g++ -ansi -pedantic -Wall -Wextra -Wc++0x-compat -Wconversion -g3'
 alias ccp='g++ -Wall -Wextra -g3'
 alias ar='ar crv'
-if [ "x$SYSTEM" == "xLinux" ];then
+if [ "x$OS" == "xLinux" ];then
 	alias ctags='\ctags'
 	alias ctags-c='ctags --c-kinds=+p --fields=+S --links=yes --languages=c --langmap=c:+.h --file-scope=yes -I __THROW'
 	alias ctags-c++='ctags --c++-kinds=+p --fields=+iaS --extra=+q+f --tag-relative=yes --languages=c++ --exclude=.svn'
