@@ -12,10 +12,19 @@ Host *
 	# PubkeyAcceptedKeyTypes=+ssh-dss # 允许 dsa key，如果你的密钥是 RSA 的则不需要
 	# AddKeysToAgent yes # 自动将 key 加入到 ssh-agent
 
+Host github.com
+	Hostname ssh.github.com
+	User elwin.gao4444@hotmail.com
+	PreferredAuthentications publickey
+	IdentityFile ~/.ssh/id_rsa
+	Port 443
+	ProxyCommand socat - PROXY:proxy.zhenguanyu.com:%h:%p,proxyport=8118
+
 # 主机别名，实现类似 git clone gerrit:xxx 的效果
 Host gerrit.zhenguanyu.com
 	Hostname gerrit.zhenguanyu.com
 	User gaoweibj
+	PreferredAuthentications publickey
 	IdentityFile ~/.ssh/fenbi_rsa
 	Port 29418
 
