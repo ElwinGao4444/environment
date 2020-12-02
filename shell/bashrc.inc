@@ -6,6 +6,7 @@ alias view='vim -R'
 if [ "x$OS" == "xMac" ];then
 	alias ls='ls -G'
 	alias readlink='greadlink'
+	alias showip="ifconfig | fgrep 'inet ' -B4"
 else
 	alias ls='ls --color=auto'
 	alias lsg='ls --group-directories-first'
@@ -30,6 +31,7 @@ alias watch='watch -d -n 1'
 if [ "x$OS" == "xLinux" ];then
 	alias top='top -s'
 fi
+# alias tcpdump='tcpdump -elXnnvvv'
 # alias rsync='rsync -avzP'
 # alias apt='apt-get -o Acquire::http::proxy="http://127.0.0.1:8087/"'
 # alias wget-dir='wget -c -r -np -nd'

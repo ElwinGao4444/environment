@@ -8,17 +8,20 @@ Host *
 	# 每隔60秒主动通信，防止长时间无操作自动断开
 	ServerAliveInterval 60
 
-	# ForwardAgent yes # 开启 Agent 转发，登录跳板机要用
-	# PubkeyAcceptedKeyTypes=+ssh-dss # 允许 dsa key，如果你的密钥是 RSA 的则不需要
-	# AddKeysToAgent yes # 自动将 key 加入到 ssh-agent
+	# 开启 Agent 转发，登录跳板机要用
+	ForwardAgent yes
+	# 允许 dsa key，如果你的密钥是 RSA 的则不需要
+	PubkeyAcceptedKeyTypes=+ssh-dss
+	# 自动将 key 加入到 ssh-agent
+	AddKeysToAgent yes
 
-Host github.com
-	Hostname ssh.github.com
-	User elwin.gao4444@hotmail.com
-	PreferredAuthentications publickey
-	IdentityFile ~/.ssh/id_rsa
-	Port 443
-	ProxyCommand socat - PROXY:proxy.zhenguanyu.com:%h:%p,proxyport=8118
+# Host github.com
+# 	Hostname github.com
+# 	User elwin.gao4444@hotmail.com
+# 	PreferredAuthentications publickey
+# 	IdentityFile ~/.ssh/elwin_rsa
+# 	Port 443
+#  	ProxyCommand socat - PROXY:proxy.zhenguanyu.com:%h:%p,proxyport=8118
 
 # 主机别名，实现类似 git clone gerrit:xxx 的效果
 Host gerrit.zhenguanyu.com
@@ -28,13 +31,15 @@ Host gerrit.zhenguanyu.com
 	IdentityFile ~/.ssh/fenbi_rsa
 	Port 29418
 
-# # 跳板机配置
-# Host access1
-# 	Hostname access1.zhenguanyu.com
-# 	ControlMaster auto
-# 	ControlPath ~/.ssh/master-%C
-# 
-# Host access2
-# 	Hostname access2.zhenguanyu.com
-# 	ControlMaster auto
-# 	ControlPath ~/.ssh/master-%C
+# 跳板机配置
+Host access1
+	ControlMaster auto
+	Hostname access1.zhenguanyu.com
+	User gaoweibj
+	IdentityFile ~/.ssh/fenbi_rsa
+
+Host access2
+	ControlMaster auto
+	Hostname access2.zhenguanyu.com
+	User gaoweibj
+	IdentityFile ~/.ssh/fenbi_rsa
