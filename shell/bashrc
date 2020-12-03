@@ -31,7 +31,9 @@ export LANG='en_US.UTF-8'
 # export LIBRARY_PATH=
 
 # java env
-export JAVA_HOME=`/usr/libexec/java_home -v 1.8`
+# export JAVA_HOME=`/usr/libexec/java_home -v 1.8 | sed 's/ /\\ /'` 				# defaule jdk
+# export JAVA_HOME='/usr/local/Cellar/openjdk/1.8.0+275/'							# open jdk
+export JAVA_HOME='/Library/Java/JavaVirtualMachines/jdk1.8.0_251.jdk/Contents/Home'	# orical jdk
 export PATH=$JAVA_HOME/bin:$PATH
 
 # golang env
@@ -45,8 +47,31 @@ export M3_HOME=/usr/local/Cellar/maven/3.6.3_1
 export PATH=$M3_HOME/bin:$PATH
 export MAVEN_OPTS="-Xms256m -Xmx1024m -Dfile.encoding=UTF-8"
 
-# export http_proxy=http://127.0.0.1:1087
-# export https_proxy=http://127.0.0.1:1087
+SSH_ENV="$HOME/.ssh/environment"
+
+function start_agent {
+    echo "Initialising new SSH agent..."
+    /usr/bin/ssh-agent | sed 's/^echo/#echo/' > "${SSH_ENV}"
+    echo succeeded
+    chmod 600 "${SSH_ENV}"
+    . "${SSH_ENV}" > /dev/null
+    /usr/bin/ssh-add;
+}
+
+# Source SSH settings, if applicable
+
+if [ -f "${SSH_ENV}" ]; then
+    . "${SSH_ENV}" > /dev/null
+    #ps ${SSH_AGENT_PID} doesn't work under cywgin
+    ps -ef | grep ${SSH_AGENT_PID} | grep ssh-agent$ > /dev/null || {
+        start_agent;
+    }
+else
+    start_agent;
+fi
+
+export http_proxy=http://proxy.zhenguanyu.com:8118
+export https_proxy=http://proxy.zhenguanyu.com:8118
 
 # Source diy definitions
 if [ -f ~/.bashrc.inc ]; then

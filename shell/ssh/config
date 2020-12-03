@@ -15,13 +15,13 @@ Host *
 	# 自动将 key 加入到 ssh-agent
 	AddKeysToAgent yes
 
-# Host github.com
-# 	Hostname github.com
-# 	User elwin.gao4444@hotmail.com
+Host github.com
+    Hostname ssh.github.com
+    User elwin.gao4444@hotmail.com
 # 	PreferredAuthentications publickey
-# 	IdentityFile ~/.ssh/elwin_rsa
-# 	Port 443
-#  	ProxyCommand socat - PROXY:proxy.zhenguanyu.com:%h:%p,proxyport=8118
+ 	IdentityFile ~/.ssh/elwin_rsa
+    Port 443
+    ProxyCommand socat - PROXY:proxy.zhenguanyu.com:%h:%p,proxyport=8118
 
 # 主机别名，实现类似 git clone gerrit:xxx 的效果
 Host gerrit.zhenguanyu.com

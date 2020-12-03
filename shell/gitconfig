@@ -72,14 +72,6 @@
 	# -n: 只显示最近的n条记录
 	
 	update = remote update origin --prune # 同步远程分支列表
-[http]
-#	proxy = 127.0.0.1:1087
-#	proxy = socks5://127.0.0.1:1086
-	sslVerify = false
-[https]
-#	proxy = 127.0.0.1:1087
-#	proxy = socks5://127.0.0.1:1086
-	sslVerify = false
 [merge]
 	tool = vimdiff
 [color]
@@ -88,8 +80,15 @@
 	branch = auto
 	interactive = auto
 	diff = auto
-[url "git@github.com:"]
+
+[url "git://github.com/"]
 	insteadOf = https://github.com/
+[http "https://github.com"]
+	proxy = proxy.zhenguanyu.com:8118
+[https "https://github.com"]
+	proxy = proxy.zhenguanyu.com:8118
+[socks]
+	proxy = proxy.zhenguanyu.com:8118
 
 # **************************************************************** #
 # **************************************************************** #
@@ -309,5 +308,3 @@
 # git rebase --onto master server client
 # 说明：取出 client 分支，找出处于 client 分支和 server 分支的共同祖先之后的修改，然后把它们在master分支上重放一遍
 
-[url "git://github.com/"]
-	insteadOf = https://github.com/
