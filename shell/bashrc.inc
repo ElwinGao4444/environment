@@ -62,7 +62,7 @@ export TIMEFORMAT=$'\nRealTime=%3lR  UserTime=%3lU  SysTime=%3lS  CPU=%P%%'
 # ip=`ifconfig | grep -A1 "eth0\|wlan0" | fgrep inet | cut -d ":" -f 2 | cut -d " " -f 1 | xargs | sed "s/ / \& /g"`
 # ip=${ip:=0.0.0.0}
 host=$(hostname)
-if [ x$LANG = 'xen_US.UTF-8' -o x$LANG = 'xen_US.utf-8' ]; then
+if [ x$LANG = 'xen_US.UTF-8' -o x$LANG = 'xen_US.utf8' ]; then
 	export PS1='`ret=$?; if [ $ret -ne 0 ];then echo "\[\e[31m\]error code: $ret\n\[\e[0m\]"; fi`\[\e[36m\]╔════\[\e[37m\]($host)\[\e[36m\]══`for((i=0;i<$COLUMNS-39-${#host};++i));do echo -n ═;done` \[\e[1m\e[33m\]$(date +"%a %F %T")\[\e[0m\e[36m\] ════╗\n\[\e[36m\]╠\[\e[0m\]\W\$ '
 	export PS2='\[\e[36m\]╠\[\e[0m\]\W\$ '
 else
