@@ -24,7 +24,7 @@ Host *
 #     ProxyCommand socat - PROXY:proxy.zhenguanyu.com:%h:%p,proxyport=8118
 
 # 主机别名，实现类似 git clone gerrit:xxx 的效果
-Host gerrit
+Host gerrit, gerrit.zhenguanyu.com
 	Hostname gerrit.zhenguanyu.com
 	User gaoweibj
 	PreferredAuthentications publickey

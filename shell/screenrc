@@ -17,16 +17,11 @@ term screen-256color
 #use Ctrl+l as the Global Key
 escape ^Xx
 
-# bind F1 to new a screen session in this terminal
-bindkey -k k5 screen
-# bind F2 to rename a screen
-bindkey -k k6 title
-# bind F4 to move to previous window
-bindkey -k k8 prev
-# bind F3 to go to screen window.
-bindkey -k k9 next
-# bind F5 to detach
-bindkey -k k7 detach
+bindkey -k k5 screen	# new screen
+bindkey -k k6 title		# rename screen
+bindkey -k k8 prev		# prev screen
+bindkey -k k9 next		# next screen
+bindkey -k F2 detach	# detach screen(F2 meas f12)
 
 # 屏幕缓冲区4096行
 defscrollback 4096
