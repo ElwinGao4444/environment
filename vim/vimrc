@@ -6,8 +6,8 @@ set backspace=indent,eol,start	" 设置backspace的工作方式（indent: 允许
 set number			" 显示行号
 set nowrap			" 不自动换行
 set textwidth=0         	" 不自动拆行
-"set tabstop=4			" TAB键所表示的空格数
-"set shiftwidth=4		" 缩进所表示的空格数（不同于TAB，是利用>>缩进的大小，自动缩进也看这个值）
+set tabstop=4			" TAB键所表示的空格数
+set shiftwidth=4		" 缩进所表示的空格数（不同于TAB，是利用>>缩进的大小，自动缩进也看这个值）
 ":set expandtab			" 使用空格替代tab
 ":%retab!			" 将tab替换为空格，不加“！”表示只替换行首的tab
 set autoindent			" 智能自动缩进
@@ -269,6 +269,37 @@ autocmd BufReadPost quickfix nnoremap <buffer> <CR> <CR>
 ":map	<ScrollWheelDown>	<C-E>
 ":map	<S-ScrollWheelDown>	<C-F>
 ":map	<C-ScrollWheelDown>	<C-D>
+
+"--------------------------------------------------------------------------
+"	自动添加头部注释
+"--------------------------------------------------------------------------
+"
+autocmd BufNewFile *.sh,*.py exec ":call SetTitle()"
+func SetTitle()
+	" shell文件
+	if &filetype == 'sh'
+	        call setline(1, "\#!/usr/bin/env bash")
+	        call setline(2, "\# Author: Elwin.Gao")
+	        call setline(3, "\# Created Time : ".strftime("%c"))
+	        call setline(4, "\# File Name: ".expand("%"))
+	        call setline(5, "\# Description:")
+	        call setline(6,"")
+	endif
+	" python文件
+	if &filetype == 'python'
+	        call setline(1, "\#!/usr/bin/env python")
+	        call setline(2, "\# -*- coding=utf8 -*-")
+	        call setline(3, "\"\"\"")
+	        call setline(4, "\# Author: Elwin.Gao")
+	        call setline(5, "\# Created Time : ".strftime("%c"))
+	        call setline(6, "\# File Name: ".expand("%"))
+	        call setline(7, "\# Description:")
+	        call setline(8, "\"\"\"")
+	        call setline(9,"")
+	        call setline(10,"if __name__ == '__main__':")
+	        call setline(11,"    print 'hello world'")
+	endif
+endfunc
 
 "--------------------------------------------------------------------------
 "	添加临时配置

@@ -6,6 +6,7 @@ alias view='vim -R'
 if [ "x$OS" == "xMac" ];then
 	alias ls='ls -G'
 	alias readlink='greadlink'
+	alias showip="ifconfig | fgrep 'inet ' -B4"
 else
 	alias ls='ls --color=auto'
 	alias lsg='ls --group-directories-first'
@@ -30,6 +31,7 @@ alias watch='watch -d -n 1'
 if [ "x$OS" == "xLinux" ];then
 	alias top='top -s'
 fi
+# alias tcpdump='tcpdump -elXnnvvv'
 # alias rsync='rsync -avzP'
 # alias apt='apt-get -o Acquire::http::proxy="http://127.0.0.1:8087/"'
 # alias wget-dir='wget -c -r -np -nd'
@@ -60,7 +62,7 @@ export TIMEFORMAT=$'\nRealTime=%3lR  UserTime=%3lU  SysTime=%3lS  CPU=%P%%'
 # ip=`ifconfig | grep -A1 "eth0\|wlan0" | fgrep inet | cut -d ":" -f 2 | cut -d " " -f 1 | xargs | sed "s/ / \& /g"`
 # ip=${ip:=0.0.0.0}
 host=$(hostname)
-if [ x$LANG = 'xen_US.UTF-8' ]; then
+if [ x$LANG = 'xen_US.UTF-8' -o x$LANG = 'xen_US.utf8' ]; then
 	export PS1='`ret=$?; if [ $ret -ne 0 ];then echo "\[\e[31m\]error code: $ret\n\[\e[0m\]"; fi`\[\e[36m\]╔════\[\e[37m\]($host)\[\e[36m\]══`for((i=0;i<$COLUMNS-39-${#host};++i));do echo -n ═;done` \[\e[1m\e[33m\]$(date +"%a %F %T")\[\e[0m\e[36m\] ════╗\n\[\e[36m\]╠\[\e[0m\]\W\$ '
 	export PS2='\[\e[36m\]╠\[\e[0m\]\W\$ '
 else
@@ -81,8 +83,8 @@ alias tm='tmux'
 alias tmls='tmux ls'
 alias tmnew='tmux new -s'
 alias tmn=tmnew
+alias tma='tmux attach'
 alias tmattach='tmux attach -t'
-alias tma=tmattach
 alias tmswitch='tmux switch -t'
 alias tmrename='tmux rename-session -t'
 alias tmk='tmux kill-session -t'

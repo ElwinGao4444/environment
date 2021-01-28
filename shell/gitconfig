@@ -10,34 +10,47 @@
 	# git config --global user.email Elwin.Gao4444@hotmail.com
 	name = ElwinGao4444
 	email = elwin.gao4444@hotmail.com
+	# name = gaoweibj
+	# email = gaoweibj@fenbi.com
 [core]
 	# git config --global core.editor vim
 	editor = vim
 [alias]
-	st = status -s			# 单行简化状态显示
+	st = status -s					# 单行简化状态显示
+	stat = status					# 简化status命令
+	stall = status -v --show-stash	# 显示完整状态信息
 
-	undo = checkout --		# index to work，撤销work的操作。注意：“--”很重要，如果没有就变成了checkout到某个分支
-	save = stage			# work to index，和add的作用一样
-	unsave = reset --		# HEAD to index，撤销index的暂存。"reset HEAD --" 和 "reset HEAD"与之等效
+	undo = checkout --			# index to work，撤销work的操作。注意：“--”很重要，如果没有就变成了checkout到某个分支
+	save = stage				# work to index，和add的作用一样
+	unsave = reset --			# HEAD to index，撤销index的暂存。"reset HEAD --" 和 "reset HEAD"与之等效
 	rework = reset --hard HEAD 	# HEAD to index to work，撤销work和index的一切修改，全部更新到HEAD状态
+	bo = reset --hard			# 指定回退到某个版本
+	backoff = reset --hard		# 指定回退到某个版本
 	# more:可以用其他版本名（或版本ID）替换HEAD达到更高级的效果
 	# HEAD表示当前版本
 	# HEAD^表示上一个版本，HEAD^^表示上两个版本
 	# HEAD~100表示上100个版本
 
-	ci = commit			# index to HEAD 提交index暂存到版本库
-	reci = commit --amend		# 增量提交，将新的修改并入现有HEAD，而不新增版本
+	ci = commit				# index to HEAD 提交index暂存到版本库
+	reci = commit --amend	# 增量提交，将新的修改并入现有HEAD，而不新增版本
 	ciall = commit -a		# work to index to HEAD，相当与save + ci，但要注意此操作只对修改文件有效，对新增文件无效
+
+	pr = push review
+	po = push origin head:refs/for/online
 
 	br = branch
 	co = checkout
+	brd = branch -d
 	brdel = branch -d
+	brn = checkout -b
 	brnew = checkout -b
 
-	df = diff			# work diff index
-	dft = difftool			# work diff index with vimdiff
+	df = diff		# work diff index
+	dft = difftool	# work diff index with vimdiff
+	dfi = diff --staged			# index diff HEAD, "diff --cached"与之等效
 	dfindex = diff --staged		# index diff HEAD, "diff --cached"与之等效
-	dfhead = diff HEAD		# work  diff HEAD
+	dfh = diff HEAD		# work  diff HEAD
+	dfhead = diff HEAD	# work  diff HEAD
 
 	lg = log --abbrev-commit --pretty=oneline
 	log-tree   = log --oneline --decorate --graph
@@ -59,14 +72,6 @@
 	# -n: 只显示最近的n条记录
 	
 	update = remote update origin --prune # 同步远程分支列表
-[http]
-#	proxy = 127.0.0.1:1087
-#	proxy = socks5://127.0.0.1:1086
-	sslVerify = false
-[https]
-#	proxy = 127.0.0.1:1087
-#	proxy = socks5://127.0.0.1:1086
-	sslVerify = false
 [merge]
 	tool = vimdiff
 [color]
@@ -75,8 +80,15 @@
 	branch = auto
 	interactive = auto
 	diff = auto
-[url "git@github.com:"]
+
+[url "git://github.com/"]
 	insteadOf = https://github.com/
+[http "https://github.com"]
+	proxy = proxy.zhenguanyu.com:8118
+[https "https://github.com"]
+	proxy = proxy.zhenguanyu.com:8118
+[socks]
+	proxy = proxy.zhenguanyu.com:8118
 
 # **************************************************************** #
 # **************************************************************** #
@@ -296,5 +308,3 @@
 # git rebase --onto master server client
 # 说明：取出 client 分支，找出处于 client 分支和 server 分支的共同祖先之后的修改，然后把它们在master分支上重放一遍
 
-[url "git://github.com/"]
-	insteadOf = https://github.com/
