@@ -7,3 +7,6 @@ set match-hidden-files off
 #set show-all-if-ambiguous on	
 # 开启 completion-ignore-case 忽略大小写
 set completion-ignore-case on
+
+# 开启bash的vim mode，默认是插入模式，按下ECS进入控制模式
+# set editing-mode vi
