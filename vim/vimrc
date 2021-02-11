@@ -1,4 +1,49 @@
 "--------------------------------------------------------------------------
+"	Vundle Plugin Manager
+"	1、git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+"	2、copy config from ~/.vim/bundle/Vundle.vim/README.md
+"	3、open a empty file with vim
+"	4、run :BundleClean
+"	5、run :BundleInstall
+"	6、run :BundleUpdate
+"	7、run :PluginInstall
+"	8、run :GoInstallBinaries
+"--------------------------------------------------------------------------
+set nocompatible              " be iMproved, required
+filetype off                  " required
+
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+" alternatively, pass a path where Vundle should install plugins
+"call vundle#begin('~/some/path/here')
+
+" let Vundle manage Vundle, required
+Plugin 'VundleVim/Vundle.vim'
+
+" Plugin Package
+Plugin 'Tagbar'
+Plugin 'scrooloose/nerdtree'
+Plugin 'fatih/vim-go'	"GoDef失败时，手动设置：let g:go_def_mode = 'godef'
+Plugin 'nsf/gocode', {'rtp': 'vim/'}
+Bundle 'davidhalter/jedi-vim'
+
+" All of your Plugins must be added before the following line
+call vundle#end()            " required
+filetype plugin indent on    " required
+" To ignore plugin indent changes, instead use:
+"filetype plugin on
+"
+" Brief help
+" :PluginList       - lists configured plugins
+" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
+" :PluginSearch foo - searches for foo; append `!` to refresh local cache
+" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
+"
+" see :h vundle for more details or wiki for FAQ
+" Put your non-Plugin stuff after this line
+"
+"--------------------------------------------------------------------------
 "	全局设置（:help）
 "--------------------------------------------------------------------------
 set nocompatible		" 不要vim模仿vi模式，建议设置，否则会有很多不兼容的问题
@@ -85,51 +130,6 @@ nmap	<silent> <C-m>	<esc>:cw<cr>
 "set nopaste	" 退出粘贴模式
 "set pastetoggle=<C-p>	" 切换“输入/粘贴”模式
 
-"--------------------------------------------------------------------------
-"	Vundle Plugin Manager
-"	1、git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-"	2、copy config from ~/.vim/bundle/Vundle.vim/README.md
-"	3、open a empty file with vim
-"	4、run :BundleClean
-"	5、run :BundleInstall
-"	6、run :BundleUpdate
-"	7、run :PluginInstall
-"	8、run :GoInstallBinaries
-"--------------------------------------------------------------------------
-set nocompatible              " be iMproved, required
-filetype off                  " required
-
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-" alternatively, pass a path where Vundle should install plugins
-"call vundle#begin('~/some/path/here')
-
-" let Vundle manage Vundle, required
-Plugin 'VundleVim/Vundle.vim'
-
-" Plugin Package
-Plugin 'Tagbar'
-Plugin 'scrooloose/nerdtree'
-Plugin 'fatih/vim-go'	"GoDef失败时，手动设置：let g:go_def_mode = 'godef'
-Plugin 'nsf/gocode', {'rtp': 'vim/'}
-Bundle 'davidhalter/jedi-vim'
-
-" All of your Plugins must be added before the following line
-call vundle#end()            " required
-filetype plugin indent on    " required
-" To ignore plugin indent changes, instead use:
-"filetype plugin on
-"
-" Brief help
-" :PluginList       - lists configured plugins
-" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
-" :PluginSearch foo - searches for foo; append `!` to refresh local cache
-" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
-"
-" see :h vundle for more details or wiki for FAQ
-" Put your non-Plugin stuff after this line
-"
 "--------------------------------------------------------------------------
 "	NERDTree
 "--------------------------------------------------------------------------
