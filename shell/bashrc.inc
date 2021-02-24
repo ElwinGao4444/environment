@@ -40,7 +40,7 @@ fi
 alias dk='docker'
 alias kc='kubectl'
 # alias minikube="minikube --image-mirror-country='cn' --image-repository='registry.aliyuncs.com/google_containers'"
-# alias kubeproxy="kubectl proxy --port=10932 --address=0.0.0.0 --accept-hosts='^.*'"	# 外部网络访问K8S service的ClusterIP
+# alias kubeproxy="kubectl proxy --port=8075 --address=0.0.0.0 --accept-hosts='^.*'"	# 外部网络访问K8S service的ClusterIP
 
 #--------------------------------------------------------------
 # BASH basic config
