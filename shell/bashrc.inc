@@ -36,7 +36,7 @@ fi
 # alias apt='apt-get -o Acquire::http::proxy="http://127.0.0.1:8087/"'
 # alias wget-dir='wget -c -r -np -nd'
 # alias minikube="minikube --image-mirror-country='cn' --image-repository='registry.cn-hangzhou.aliyuncs.com/google_containers'"
-# alias kubeproxy="kubectl proxy --port=8000 --address=10.13.121.107 --accept-hosts='^.*'"
+# alias kubeproxy="kubectl proxy --port=80 --address=0.0.0.0 --accept-hosts='^.*'"
 # alias java-proxy='java -jar -Xms1024M -Xmx1024M -Dhttp.proxyHost=127.0.0.1 -Dhttp.proxyPort=8087'
 
 #--------------------------------------------------------------
