@@ -37,6 +37,7 @@ fi
 # alias wget-dir='wget -c -r -np -nd'
 # alias java-proxy='java -jar -Xms1024M -Xmx1024M -Dhttp.proxyHost=127.0.0.1 -Dhttp.proxyPort=8087'
 
+alias dk='docker'
 alias kc='kubectl'
 # alias minikube="minikube --image-mirror-country='cn' --image-repository='registry.cn-hangzhou.aliyuncs.com/google_containers'"
 # alias kubeproxy="kubectl proxy --port=8080 --address=0.0.0.0 --accept-hosts='^.*'"	# 外部网络访问K8S service的ClusterIP
